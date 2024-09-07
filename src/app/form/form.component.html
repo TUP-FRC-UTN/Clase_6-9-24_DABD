@@ -1,0 +1,55 @@
+<form #form="ngForm" (ngSubmit)="sendForm(form)" class="row g-3 container">
+    <h1>Datos del programador</h1>
+    <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Nombre:</label>
+        <input #nombre="ngModel"
+            [ngClass]="{'is-invalid': nombre.invalid  && (nombre.dirty || nombre.touched),'is-valid': nombre.valid }"
+            type="text" class="form-control" name="nombre" [(ngModel)]="prog.nombre" required minlength="5">
+        @if(nombre.invalid && (nombre.dirty || nombre.touched)){
+        @if(nombre.getError('required')) {
+        <div class="text-danger">El nombre es obligatorio</div>
+        }@else{
+        <div class="text-danger">Debe contener como minimo 5 caracteres.</div>
+        }}
+    </div>
+    <div class="col-md-4">
+        <label for="validationCustom02" class="form-label">Apellido:</label>
+        <input #apellido="ngModel" type="text" class="form-control" name="apellido" [(ngModel)]="prog.apellido"
+            required>
+        @if(apellido.getError('required') && apellido.dirty){
+        <div class="text-danger">El apellido es obligatorio.</div>
+        }
+    </div>
+    <div class="col-md-12">
+        <label for="validationCustomUsername" class="form-label">Habilidades</label>
+        <select class="form-select" name="habilidadSeleccionada" [(ngModel)]="habilidadSeleccionada">
+            @for(item of listHabilidades ; track $index){
+            <option [value]="item">{{item}}</option>
+            }
+        </select>
+        <div class="mt-2">
+            <button type="button" class="btn btn-primary" (click)="agregarHabilidades()">+</button>
+            @for(habilidad of prog.habilidades; track $index){
+            <span class="badge bg-primary m-1">{{habilidad}}
+                <button type="button" class="btn-close btn-close-white" (click)="eliminarHabilidades($index)"></button>
+            </span> }
+        </div>
+
+    </div>
+    <hr>
+    <div ngModelGroup="contacto" class="row container mt-2">
+
+        <h3>Datos del contacto</h3>
+        <div class="col-md-4">
+            <label for="validationCustom02" class="form-label">Email:</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="prog.contacto.email">
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom02" class="form-label">Red Social:</label>
+            <input type="text" class="form-control" name="redSocial" [(ngModel)]="prog.contacto.redSocial">
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+</form>
