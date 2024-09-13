@@ -5,8 +5,8 @@
         <input #nombre="ngModel"
             [ngClass]="{'is-invalid': nombre.invalid  && (nombre.dirty || nombre.touched),'is-valid': nombre.valid }"
             type="text" class="form-control" name="nombre" [(ngModel)]="prog.nombre" required minlength="5">
-        @if(nombre.invalid && (nombre.dirty || nombre.touched)){
-        @if(nombre.getError('required')) {
+        @if(nombre.invalid  && (nombre.dirty || nombre.touched)){
+        @if(nombre.getError('minlength')) {
         <div class="text-danger">El nombre es obligatorio</div>
         }@else{
         <div class="text-danger">Debe contener como minimo 5 caracteres.</div>
@@ -38,7 +38,6 @@
     </div>
     <hr>
     <div ngModelGroup="contacto" class="row container mt-2">
-
         <h3>Datos del contacto</h3>
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">Email:</label>
