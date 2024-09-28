@@ -1,0 +1,65 @@
+{
+  "programadores": [
+    {
+      "nombre": "Fabio",
+      "apellido": "Mercado",
+      "habilidades": [
+        "JavaScript",
+        "Angular",
+        "TypeScript"
+      ],
+      "fechaNacimiento": "1990-01-01",
+      "contacto": {
+        "email": "fabio@example.com",
+        "redSocial": "https://twitter.com/fabiomercado"
+      },
+      "id": "65asd"
+    },
+    {
+      "id": "3354",
+      "nombre": "juancito",
+      "apellido": "perez",
+      "habilidades": [
+        ".Net"
+      ],
+      "contacto": {
+        "email": "juan@gmail.com",
+        "redSocial": "Linkedin"
+      }
+    },
+    {
+      "id": "ded1",
+      "nombre": "juancito",
+      "apellido": "perez ",
+      "habilidades": [
+        ".Net"
+      ],
+      "contacto": {
+        "email": "juna@gmail.com",
+        "redSocial": "instragram"
+      }
+    },
+    {
+      "id": "8c2b",
+      "nombre": "juancito",
+      "apellido": "perez2",
+      "habilidades": [
+        ".Net"
+      ],
+      "contacto": {
+        "email": "juan@gmail.com",
+        "redSocial": "instragram"
+      }
+    },
+    {
+      "id": "5c5e",
+      "nombre": "juacntio ",
+      "apellido": "perezcito",
+      "habilidades": [],
+      "contacto": {
+        "email": "juan",
+        "redSocial": "jkasdas"
+      }
+    }
+  ]
+}
