@@ -16,6 +16,7 @@ import { ProgService } from '../prog.service';
 import { NavegationService } from '../navegation.service';
 import { ComunicacionEntreHnoService } from '../comunicacion-entre-hno.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -34,20 +35,23 @@ export class FormComponent implements OnInit, OnChanges,OnDestroy {
 
   //constructor(private progService : ProgService) {}
   private readonly progService = inject(ProgService);
-  private readonly navegationService = inject(NavegationService)
-  private readonly cecService = inject(ComunicacionEntreHnoService)
-
+ // private readonly navegationService = inject(NavegationService)
+  //private readonly cecService = inject(ComunicacionEntreHnoService)
+  private readonly router = inject(Router)
+  private readonly activatedRouter = inject(ActivatedRoute)
   listHabilidades: string[] = ['.Net', 'Java', 'Javascript', 'AWS'];
 
   habilidadSeleccionada: string = '';
   ngOnInit(): void {
-  const sub =  this.cecService.getProgramadorEdit().subscribe((data) => {
-      if (data != null) {
-        this.prog = { ...data }
-        this.isEdit = true
-      }
+    this.activatedRouter.params.subscribe((data) => {
+      this.getById(data['id'])
     })
-    this.subscription.add(sub)
+  }
+  getById(id: string) {
+    this.progService.getById(id).subscribe((data) => {
+      this.prog = data;
+      this.isEdit = true
+    });
   }
   sendForm(form: NgForm) {
     //TODO:
@@ -59,14 +63,14 @@ export class FormComponent implements OnInit, OnChanges,OnDestroy {
         this.progService.put(this.prog).subscribe({
           next: (data) => alert("programador creado" + data.id),
           error: (errr) => alert("Error al crear el programdor."),
-          complete: () => this.navegationService.setComponente('list')
+          complete: () => this.router.navigate(['list'])
         }))
       } else {
         this.subscription.add(
         this.progService.post(this.prog).subscribe({
           next: (data) => alert("programador creado" + data.id),
           error: (errr) => alert("Error al crear el programdor."),
-          complete: () => this.navegationService.setComponente('list')
+         complete: () => this.router.navigate(['list'])
         }))
       }
 

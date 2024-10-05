@@ -1,29 +1,16 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { FormComponent } from './form/form.component';
-import { Programador } from './programador';
-import { ProgService } from './prog.service';
-import { ListComponent } from "./list/list.component";
-import { NavegationService } from './navegation.service';
+import { Component} from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormComponent, ListComponent],
+  imports: [RouterOutlet,RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
  
  
-  showForm : string = 'list'
-
-  private readonly navegationService = inject(NavegationService)
-
-  ngOnInit(): void {
-    this.navegationService.getComponent().subscribe((component) => {
-      this.showForm = component
-    })
-  }
 
 }

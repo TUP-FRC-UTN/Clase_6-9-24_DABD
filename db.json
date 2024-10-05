@@ -60,6 +60,19 @@
         "email": "juan",
         "redSocial": "jkasdas"
       }
+    },
+    {
+      "id": "aa42",
+      "nombre": "exequiel",
+      "apellido": "santoro",
+      "habilidades": [
+        ".Net",
+        "Java"
+      ],
+      "contacto": {
+        "email": "exe@gmailcom",
+        "redSocial": "linkedin"
+      }
     }
   ]
 }
