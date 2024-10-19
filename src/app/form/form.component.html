@@ -1,26 +1,20 @@
-<form #form="ngForm" (ngSubmit)="sendForm(form)" class="row g-3 container">
+<form [formGroup]="form" (ngSubmit)="sendForm()" class="row g-3 container">
     <h1>Datos del programador</h1>
     <div class="col-md-4">
         <label for="validationCustom01" class="form-label">Nombre:</label>
-        <input #nombre="ngModel"
-            [ngClass]="{'is-invalid': nombre.invalid  && (nombre.dirty || nombre.touched),'is-valid': nombre.valid }"
-            type="text" class="form-control" name="nombre" [(ngModel)]="prog.nombre" required minlength="5">
-        @if(nombre.invalid  && (nombre.dirty || nombre.touched)){
-        @if(nombre.getError('minlength')) {
-        <div class="text-danger">El nombre es obligatorio</div>
-        }@else{
-        <div class="text-danger">Debe contener como minimo 5 caracteres.</div>
+        <input [ngClass]="{'is-invalid':form.controls['nombre'].invalid && form.controls['nombre'].touched }" formControlName="nombre" type="text" class="form-control">
+        @if(form.controls['nombre'].invalid && form.controls['nombre'].touched){
+        @if(form.controls['nombre'].errors?.['required']){
+        <div class="text-danger">Nombre obligatorio</div>
         }}
+
     </div>
     <div class="col-md-4">
         <label for="validationCustom02" class="form-label">Apellido:</label>
-        <input #apellido="ngModel" type="text" class="form-control" name="apellido" [(ngModel)]="prog.apellido"
-            required>
-        @if(apellido.getError('required') && apellido.dirty){
-        <div class="text-danger">El apellido es obligatorio.</div>
-        }
+        <input type="text" class="form-control" formControlName="apellido">
+
     </div>
-    <div class="col-md-12">
+    <!-- <div class="col-md-12">
         <label for="validationCustomUsername" class="form-label">Habilidades</label>
         <select class="form-select" name="habilidadSeleccionada" [(ngModel)]="habilidadSeleccionada">
             @for(item of listHabilidades ; track $index){
@@ -36,17 +30,41 @@
         </div>
 
     </div>
-    <hr>
-    <div ngModelGroup="contacto" class="row container mt-2">
+    <hr> -->
+    <div formGroupName="contacto" class="row container mt-2">
         <h3>Datos del contacto</h3>
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">Email:</label>
-            <input type="text" class="form-control" name="email" [(ngModel)]="prog.contacto.email">
+            <input type="text" formControlName="email" class="form-control">
         </div>
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">Red Social:</label>
-            <input type="text" class="form-control" name="redSocial" [(ngModel)]="prog.contacto.redSocial">
+            <input type="text" formControlName="redSocial" class="form-control">
         </div>
+    </div>
+    <div formArrayName="proyectos">
+        <button (click)="agregarProyectos()">Agregar</button>
+        @for(proyecto of proyectos.controls; track $index){
+        <div [formGroupName]="$index">
+            <div class="col-md-4">
+                <label class="form-label">Nombre:</label>
+                <input type="text" formControlName="nombre" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Fecha Inicio:</label>
+                <input type="date" formControlName="fechaInicio" class="form-control">
+                @if(proyecto.get('fechaInicio')?.hasError('errorFechaInicio')){
+                  <div class="text-danger">La fecha de inicio no puede ser mayor a la de hoy</div>
+                }
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Fecha Fin:</label>
+                <input type="date" formControlName="fechaFin" class="form-control">
+            </div>
+        </div>
+        <button class="btn btn-close" (click)="quitarProyecto($index)"></button>
+        }
+
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Enviar</button>

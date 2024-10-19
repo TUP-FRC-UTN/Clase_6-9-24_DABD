@@ -5,7 +5,6 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nombre Completo</th>
-          <th scope="col">Habilidades</th>
           <th scope="col">Email</th>
           <th scope="col">Red Social</th>
           <th scope="col">Acciones</th>
@@ -16,7 +15,6 @@
         <tr>
           <th scope="row">{{$index}}</th>
           <td>{{prog.apellido}} {{prog.nombre}}</td>
-          <td>{{prog.habilidades.join(", ")}}</td>
           <td>{{prog.contacto.email}}</td>
           <td>{{prog.contacto.redSocial}}</td>
           <td><button type="button" class="btn btn-danger" (click)="eliminarProgramador(prog.id)">Eliminar</button>

@@ -1,4 +1,5 @@
 import { Contacto } from "./contacto";
+import { Proyecto } from "./proyecto";
 
 export class Programador {
     id? : string 
@@ -6,5 +7,5 @@ export class Programador {
     apellido: string = ''
     habilidades : string[] = []
     contacto : Contacto = new Contacto();
-
+    proyectos : Proyecto[]= []
 }

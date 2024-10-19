@@ -1,3 +1,9 @@
-<p>Nombre y apellido : {{prog.nombre}}  {{prog.apellido}}</p>
-<p>Habilidades : {{prog.habilidades.join(", ")}}  </p>
+<p>Nombre y apellido : {{prog.nombre}} {{prog.apellido}}</p>
 
+@for(proyecto of prog.proyectos;track $index){
+    <h1>Proyecto nro: {{$index +  1}}</h1>
+<p>{{proyecto.nombre}}</p>
+<p>{{proyecto.fechaInicio}}</p>
+<p>{{proyecto.fechaInicio}}</p>
+
+}
